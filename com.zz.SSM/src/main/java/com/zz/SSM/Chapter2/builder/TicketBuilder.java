@@ -16,6 +16,7 @@ public class TicketBuilder {
 		helper.buildElderly("老人票");
 		helper.buildSoldier("军人票");
 		Object ticket = TicketBuilder.builder(helper);
+		
 	}
 
 }
