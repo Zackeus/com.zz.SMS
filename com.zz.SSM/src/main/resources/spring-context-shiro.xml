@@ -8,9 +8,9 @@
         http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <!-- 使用spring组件扫描@service  -->
-    <context:component-scan base-package="com.zz.CTI"/>
+    <context:component-scan base-package="com.zz.SSM"/>
     <!-- 自定义域realm -->
-    <bean id="custom_Realm" class="com.zz.CTI.Shiro.CustomRealm"></bean>
+    <bean id="custom_Realm" class="com.zz.SSM.Shiro.CustomRealm"></bean>
     <!-- 安全管理器  ref对象-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="custom_Realm"/>
@@ -34,7 +34,7 @@
         <property name="sessionValidationSchedulerEnabled" value="true"/>
     </bean>
     <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/>
-    <bean id="sessionListener" class="com.zz.CTI.Shiro.SessionListener"></bean>
+    <bean id="sessionListener" class="com.zz.SSM.Shiro.SessionListener"></bean>
     
     <!-- shiro filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -51,9 +51,6 @@
             <value>
                 <!-- 对静态资源设置匿名访问 -->
                 /test/** = anon
-                /sys/login = anon
-                /sys/forcelogin = anon
-                /Layui/** = anon <!--设置静态资源文件为游客可访问-->
                 /**  = authc <!-- 未登录请求拦截 -->
             </value>
         </property>
