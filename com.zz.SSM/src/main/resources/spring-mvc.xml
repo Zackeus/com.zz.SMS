@@ -14,7 +14,7 @@
     <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
 	<!-- 静态资源映射 -->
-    <mvc:resources mapping="/Layui/**" location="/Layui/" cache-period="31536000"/>  
+    <mvc:resources mapping="/Static/**" location="/Static/" cache-period="31536000"/>  
                       
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.zz.SSM.Controller" />
