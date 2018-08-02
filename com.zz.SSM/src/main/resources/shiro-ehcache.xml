@@ -1,7 +1,20 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
-    <!--diskStore：缓存数据持久化的目录 地址  -->  
+    <!-- java.io.tmpdir：Java临时目录。指定一个文件目录，当EhCache把数据写到硬盘上或者系统jvm内存时，将把数据写到这个文件目录下 -->
     <diskStore path="java.io.tmpdir" />
+    
+    <!-- maxElementsInMemory：设置基于内存的缓存可存放对象的最大数目。  -->
+    <!-- maxElementsOnDisk====磁盘缓存中最多可以存放的元素数量,0表示无穷大 -->
+	<!-- eternal：如果为true，表示对象永远不会过期，此时会忽略timeToIdleSeconds和timeToLiveSeconds属性，默认为false; -->
+	<!-- timeToIdleSeconds： 设定允许对象处于空闲状态的最长时间，以秒为单位。当对象自从最近一次被访问后，如果处于空闲状态的时间超过了 -->
+	<!-- timeToIdleSeconds属性值，这个对象就会过期。当对象过期，EHCache将把它从缓存中清空。只有当eternal属性为false，该属性才有效。  如果该属性值为0，则表示对象可以无限期地处于空闲状态。  -->
+	<!-- timeToLiveSeconds：设定对象允许存在于缓存中的最长时间，以秒为单位。当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值，这个对象就会过期。当对象过期，EHCache将把它从缓存中清除。只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地存在于缓存中。timeToLiveSeconds必须大于timeToIdleSeconds属性，才有意义。  -->
+	<!-- overflowToDisk：如果为true,表示当基于内存的缓存中的对象数目达到了maxElementsInMemory界限后，会把益出的对象写到基于硬盘的缓存中。 -->
+	<!-- diskPersistent="false"  磁盘缓存在VM重新启动时是否保持(默认为false) -->
+    <!-- diskExpiryThreadIntervalSeconds="100" 磁盘失效线程运行时间间隔,默认是120秒  -->
+    <!-- memoryStoreEvictionPolicy="LFU" 内存存储与释放策略.当达到maxElementsInMemory时共有三种策略,分别为LRU(最近最少使用)、LFU(最常用的)、FIFO(先进先出)默认使用"最近使用"策略 -->
+    
+    <!-- 设定缓存的默认数据过期策略 -->
     <defaultCache
         maxElementsInMemory="1000"
         maxElementsOnDisk="10000000"  
@@ -12,5 +25,17 @@
         timeToLiveSeconds="120"   
         diskExpiryThreadIntervalSeconds="120"  
         memoryStoreEvictionPolicy="LRU">  
-    </defaultCache>  
+    </defaultCache>
+    
+    <!--  自定义缓存策略-学生信息缓存容器对应策略-->
+    <cache name="studentCache"          
+       	maxElementsInMemory="1000"
+	    maxElementsOnDisk="10000000"  
+	    eternal="false"
+	    overflowToDisk="false"   
+	    diskPersistent="false"  
+	    timeToIdleSeconds="120"  
+	    timeToLiveSeconds="120"   
+	    diskExpiryThreadIntervalSeconds="120"  
+	    memoryStoreEvictionPolicy="LRU"/>
 </ehcache>  

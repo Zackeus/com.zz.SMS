@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zz.SSM.Bean.Customer;
+import com.zz.SSM.Bean.Student;
+import com.zz.SSM.Service.StudentService;
 import com.zz.SSM.Service.TestService;
 import com.zz.SSM.Util.Logs;
 
@@ -21,6 +23,9 @@ public class TestController {
 	
 	@Autowired
 	private TestService testService;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	/**
 	 * 
@@ -85,6 +90,33 @@ public class TestController {
 		Logs.info(customer2);
 		Customer customer3 = testService.getCustomerInfo(customer);
 		Logs.info(customer3);
+	}
+	
+	/**
+	 * 
+	 * @Title: encacheTest
+	 * @Description: TODO(encache缓存测试)
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/encacheTest")
+	public void encacheTest(HttpServletRequest request, HttpServletResponse response) {
+		List<Student> list = studentService.getStudents();
+		for(Student student: list) {
+			Logs.info(student);
+		}
+	}
+	
+	/**
+	 * 
+	 * @Title: clearCacheTest
+	 * @Description: TODO(清除缓存测试)
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/clearCacheTest")
+	public void clearCacheTest(HttpServletRequest request, HttpServletResponse response) {
+		studentService.clearCache();
 	}
 
 }

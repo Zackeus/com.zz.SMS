@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/cache 
+       http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
 
     <!-- 使用spring组件扫描@service  -->
     <context:component-scan base-package="com.zz.SSM"/>
@@ -17,7 +20,7 @@
         <!-- 配置sessionListener -->  
         <property name="sessionManager" ref="sessionManager" />
         <!-- 配置缓存管理器 -->
-        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheManager" ref="shiroCacheManager"/>
     </bean>
     
     <!-- 自定义session监听器 -->  
@@ -57,10 +60,21 @@
         </property>
     </bean>
     
-    <!-- 缓存管理器 -->  
-	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
-        <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>  
+    <!-- 开启spring缓存 -->
+    <cache:annotation-driven cache-manager="cacheManager" />  
+
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="classpath:shiro-ehcache.xml"></property>  
     </bean>  
+	<!-- 缓存管理器 -->  
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">  
+        <property name="cacheManager" ref="ehcache"></property>  
+    </bean>  
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+<!--         <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/> -->
+        <property name="cacheManager" ref="ehcache"/>
+    </bean>  
+
     <!-- Shiro生命周期处理器 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
     <!-- AOP式方法级权限检查  -->
