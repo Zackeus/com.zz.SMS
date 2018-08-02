@@ -7,10 +7,53 @@
 		,[ADDRESS_TYPE],[REQUEST_EMPNO],[REQUEST_DATETIME],[REMARK],[SEND_BATCH]
 	</sql>
 	
+	<sql id="customerResultRole">
+		[TASK_ID],[TASK_DATA_ID],[CALL_TIME],[CALL_BEGIN_TIME],[CALL_END_TIME],[CALL_TIME_LENGTH],
+	    [CALL_PROC_TIME_LENGTH],[STATUS],SO.[STATUS_NAME] AS [CALL_STATUS],[RESULT],RO.[CODE_NAME] AS [CALL_RESULT],
+	    [TELL_NUMBER],[RECORD_FILE],[FILE_LENGTH],[INSERT_TIME]
+	</sql>
+	
+	<sql id="customerCallDataRole">
+		[TASK_DATA_ID],[INDEX],[NODE_ID],[NODE],[ROBOT],[HIT_ID],[HIT_NAME],[RESULT]
+	</sql>
+	
+	<resultMap type="com.zz.SSM.Bean.Customer" id="CustomerResultMap">
+    	<id column="TASK_ID" property="taskId" />
+        <id column="PHONE_NUM" property="phoneNum" />
+		<collection column="{taskId = TASK_ID, phoneNum = PHONE_NUM}" property="customerCallResults" fetchType="lazy" select="getCustomerCallResult"/>
+    </resultMap>
+    
+    <resultMap type="com.zz.SSM.Bean.CustomerCallResult" id="CustomerCallResultMap">
+    	<id column="TASK_DATA_ID" property="taskDataId" />
+		<collection column="TASK_DATA_ID" property="callDatas" select="getCallDatas"/>
+    </resultMap>
+	
 	<!-- 分页测试 -->
 	<select id="pageTest" resultType="com.zz.SSM.Bean.Customer">
 		SELECT <include refid="customerRole"/>
-		  	FROM [Message].[dbo].[COLLECTION_INFO]
-		  	ORDER BY [REQUEST_DATETIME] DESC
+		FROM [Message].[dbo].[COLLECTION_INFO]
+		ORDER BY [REQUEST_DATETIME] DESC
+	</select>
+	
+	<select id="getCustomerInfo" resultMap="CustomerResultMap">
+		SELECT <include refid="customerRole"/>
+		FROM [Message].[dbo].[COLLECTION_INFO]
+		WHERE [TASK_ID] = #{customer.taskId} AND [PHONE_NUM] = #{customer.phoneNum}
+	</select>
+	
+	<!-- 根据外呼任务编号查询逾期客户催收结果信息 -->
+	<select id="getCustomerCallResult" parameterType="java.util.HashMap" resultMap="CustomerCallResultMap">
+		SELECT <include refid="customerResultRole"/>
+		FROM [Message].[dbo].[COLLECTION_RESULT] CR
+		LEFT JOIN [Message].[dbo].[COLLECTION_RESULT_CODE] RO ON CR.[RESULT] = RO.[RESULT_CODE]
+		LEFT JOIN [Message].[dbo].[COLLECTION_STATUS_CODE] SO ON CR.[STATUS] = SO.[STATUS_CODE]
+		WHERE [TASK_ID] = #{taskId} AND [TELL_NUMBER] = #{phoneNum}
+	</select>
+	
+	<!-- 根据外呼任务编号查询催收客户通话内容 -->
+	<select id="getCallDatas" parameterType="String" resultType="com.zz.SSM.Bean.CustomerCallData">
+		SELECT <include refid="customerCallDataRole"/>
+		FROM [Message].[dbo].[COLLECTION_CALL_DATA]
+		WHERE [TASK_DATA_ID] = #{taskDataId}
 	</select>
 </mapper>  

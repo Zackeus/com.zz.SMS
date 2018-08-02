@@ -20,5 +20,9 @@ public class TestService {
 	public List<Customer> pageTest(RowBounds rowBounds) {
 		return testDao.pageTest(rowBounds);
 	}
+	
+	public Customer getCustomerInfo(Customer customer) {
+		return testDao.getCustomerInfo(customer);
+	}
 
 }

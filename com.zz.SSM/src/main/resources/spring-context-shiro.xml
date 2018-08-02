@@ -50,6 +50,7 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- 对静态资源设置匿名访问 -->
+                /static/** = anon
                 /test/** = anon
                 /**  = authc <!-- 未登录请求拦截 -->
             </value>
