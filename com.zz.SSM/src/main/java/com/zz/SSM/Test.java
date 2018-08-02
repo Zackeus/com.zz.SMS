@@ -16,7 +16,10 @@ public class Test {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/spring-*.xml");
 		TestService testService = (TestService) context.getBean("testService");
 		List<Customer> list = testService.pageTest(new RowBounds(10, 30));
-		System.out.println(list.size());
+		
+		for(Customer customer : list) {
+			System.out.println(customer);
+		}
 	}
 
 }

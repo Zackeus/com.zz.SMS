@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zz.SSM.Dao.TestDao">
+
+	<sql id="customerRole">
+		[TASK_ID],[CONTRACT_NUM],[OD_NAME],[RTYPE],[PHONE_NUM],[OD_DAYS],[OD_AMOUNT]
+		,[ADDRESS_TYPE],[REQUEST_EMPNO],[REQUEST_DATETIME],[REMARK],[SEND_BATCH]
+	</sql>
+	
 	<!-- 分页测试 -->
 	<select id="pageTest" resultType="com.zz.SSM.Bean.Customer">
-		SELECT [TASK_ID]
-		      ,[CONTRACT_NUM]
-		      ,[OD_NAME]
-		      ,[RTYPE]
-		      ,[PHONE_NUM]
-		      ,[OD_DAYS]
-		      ,[OD_AMOUNT]
-		      ,[ADDRESS_TYPE]
-		      ,[REQUEST_EMPNO]
-		      ,[REQUEST_DATETIME]
-		      ,[REMARK]
-		      ,[SEND_BATCH]
-		  FROM [Message].[dbo].[COLLECTION_INFO]
-		  ORDER BY [REQUEST_DATETIME] DESC
+		SELECT <include refid="customerRole"/>
+		  	FROM [Message].[dbo].[COLLECTION_INFO]
+		  	ORDER BY [REQUEST_DATETIME] DESC
 	</select>
 </mapper>  
