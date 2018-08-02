@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zz.SSM.Bean.Customer;
@@ -29,7 +30,11 @@ public class TestController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/htmlTest")
-	public String htmlTest(HttpServletRequest request, HttpServletResponse response) {
+	public String htmlTest(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Customer customer = new Customer();
+		customer.setTaskId(new Long("61366"));
+		customer.setPhoneNum(new Long("13021525231"));
+		model.addAttribute("customer", testService.getCustomerInfo(customer));
 		return "Test";
 	}
 	
@@ -60,6 +65,26 @@ public class TestController {
 		customer.setPhoneNum(new Long("13021525231"));
 		
 		customer = testService.getCustomerInfo(customer);
+		Logs.info(customer);
+	}
+	
+	/**
+	 * 
+	 * @Title:firstCacheTest
+	 * @Description: TODO(测试二级缓存)
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/cacheTest")
+	public void cacheTest(HttpServletRequest request, HttpServletResponse response) {
+		Customer customer = new Customer();
+		customer.setTaskId(new Long("61366"));
+		customer.setPhoneNum(new Long("13021525231"));
+		
+		Customer customer2 = testService.getCustomerInfo(customer);
+		Logs.info(customer2);
+		Customer customer3 = testService.getCustomerInfo(customer);
+		Logs.info(customer3);
 	}
 
 }
