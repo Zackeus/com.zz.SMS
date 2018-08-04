@@ -7,5 +7,5 @@ import com.zz.SSM.Bean.Student;
 public interface StudentDao {
 	
 	 List<Student> getStudents();
-
+	 
 }

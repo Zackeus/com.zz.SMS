@@ -1,5 +1,6 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-    xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+    xsi:noNamespaceSchemaLocation="../config/ehcache.xsd"
+    updateCheck="false" monitoring="autodetect" dynamicConfig="true">
     <!-- java.io.tmpdir：Java临时目录。指定一个文件目录，当EhCache把数据写到硬盘上或者系统jvm内存时，将把数据写到这个文件目录下 -->
     <diskStore path="java.io.tmpdir" />
     

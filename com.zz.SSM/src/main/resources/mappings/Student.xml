@@ -3,7 +3,7 @@
 <mapper namespace="com.zz.SSM.Dao.StudentDao">
 
 	<select id="getStudents" resultType="com.zz.SSM.Bean.Student">
-    	SELECT * FROM [Message].[dbo].[STUDENT]
+    	SELECT * FROM [BackupCopy].[dbo].[STUDENT]
     </select>
-
+    
 </mapper>

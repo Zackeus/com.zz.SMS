@@ -66,10 +66,11 @@
     <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
         <property name="configLocation" value="classpath:shiro-ehcache.xml"></property>  
     </bean>  
-	<!-- 缓存管理器 -->  
+	<!-- Spring缓存管理器 -->  
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">  
         <property name="cacheManager" ref="ehcache"></property>  
-    </bean>  
+    </bean>
+    <!-- Shiro缓存管理器 -->  
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
 <!--         <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/> -->
         <property name="cacheManager" ref="ehcache"/>
