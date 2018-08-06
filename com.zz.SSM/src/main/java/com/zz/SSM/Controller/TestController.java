@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zz.SSM.Bean.Customer;
+import com.zz.SSM.Bean.Page;
 import com.zz.SSM.Bean.Student;
 import com.zz.SSM.Service.StudentService;
 import com.zz.SSM.Service.TestService;
@@ -22,7 +22,7 @@ import com.zz.SSM.Util.Logs;
 public class TestController {
 	
 	@Autowired
-	private TestService testService;
+	private TestService<Customer> testService;
 	
 	@Autowired
 	private StudentService studentService;
@@ -52,8 +52,10 @@ public class TestController {
 	 */
 	@RequestMapping(value = "/pageTest")
 	public void pageTest(HttpServletRequest request, HttpServletResponse response) {
-		List<Customer> list = testService.pageTest(new RowBounds(10, 30));
-		Logs.info(list.size());
+		Page<Customer> page = testService.getCustomers(new Page<>(900, 30), new Customer());
+		Logs.info("总条数：" + page.getTotal());
+		Logs.info("总页数：" + page.getTotalPage());
+		Logs.info("查询条数:" + page.getList().size());
 	}
 	
 	/**
@@ -118,5 +120,5 @@ public class TestController {
 	public void clearCacheTest(HttpServletRequest request, HttpServletResponse response) {
 		studentService.clearCache();
 	}
-
+	
 }

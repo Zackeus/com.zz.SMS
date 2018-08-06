@@ -38,6 +38,17 @@
     
     <!-- 插件配置 -->
 	<plugins>
-		<plugin interceptor="com.zz.SSM.Plugins.MyPlugin" />
+		<plugin interceptor="com.zz.SSM.Plugins.PagePlugin">
+			<!-- 默认页码 -->
+			<property name="default.page" value="1"/>
+			<!-- 默认每页条数 -->
+			<property name="default.pageSize" value="20"/>
+			<!-- 是否启动分页插件功能 -->
+			<property name="default.useFlag" value="true"/>
+			<!-- 是否检查页码有效性，如果非有效，则抛出异常  -->
+			<property name="default.checkFlag" value="true"/>
+			<!-- 针对哪些含有order by 的sql，是否去掉最后一个 order by 以后的 sql 语句，提高性能  -->
+			<property name="default.cleanOrderBy" value="true"/>
+		</plugin>
     </plugins>
 </configuration>

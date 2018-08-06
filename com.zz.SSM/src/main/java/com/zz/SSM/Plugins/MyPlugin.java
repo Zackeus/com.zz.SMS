@@ -17,7 +17,7 @@ import com.zz.SSM.Util.Logs;
 /**
  * 
  * @Title:MyPlugin
- * @Description:TODO()
+ * @Description:TODO(插件测试)
  * @Company: 
  * @author zhou.zhang
  * @date 2018年8月4日 下午4:26:58
@@ -56,6 +56,21 @@ public class MyPlugin implements Interceptor {
 		Logs.info("after ......");
 		return obj;
 	}
+	
+//	@Override
+//    public Object intercept(Invocation invocation) throws Throwable {
+//        StatementHandler statementHandler = (StatementHandler)invocation.getTarget();
+//        BoundSql boundSql = statementHandler.getBoundSql();
+//        // 原始的SQL语句
+//        String sql = boundSql.getSql();
+//        Object parameterObject = boundSql.getParameterObject();
+//		Logs.info("执行的SQL：【" + sql + "】");
+//		Logs.info("参数：【" + parameterObject + "】");
+//		Logs.info("before ......");
+//        Object object = invocation.proceed();
+//        Logs.info("after ......");
+//        return object;
+//    }
 
 	/**
 	 * 
