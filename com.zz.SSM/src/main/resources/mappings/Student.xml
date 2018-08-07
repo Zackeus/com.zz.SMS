@@ -6,4 +6,11 @@
     	SELECT * FROM [BackupCopy].[dbo].[STUDENT]
     </select>
     
+    <insert id="insert">
+    	INSERT INTO [BackupCopy].[dbo].[STUDENT]
+    	([ID],[NAME],[AGE],[ADDRESS])
+    	VALUES
+    	(#{id},#{name},#{age},#{address})
+    </insert>
+    
 </mapper>

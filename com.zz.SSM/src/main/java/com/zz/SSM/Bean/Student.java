@@ -1,7 +1,5 @@
 package com.zz.SSM.Bean;
 
-import java.io.Serializable;
-
 /**
  * 
  * @ClassName: Student
@@ -9,34 +7,23 @@ import java.io.Serializable;
  * @author zz
  * @date: 2018年8月2日下午7:19:11
  */
-public class Student implements Serializable {
+public class Student extends DataEntity<Student> {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
 	private String name;
 	private Integer age;
 	private String address;
 
 	public Student() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public Student(Integer id, String name, Integer age, String address) {
+	
+	public Student(String name, Integer age, String address) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.age = age;
 		this.address = address;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -61,11 +48,6 @@ public class Student implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + "]";
 	}
 
 }

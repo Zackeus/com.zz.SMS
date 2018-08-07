@@ -6,15 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.zz.SSM.Bean.Student;
 import com.zz.SSM.Dao.StudentDao;
 import com.zz.SSM.Util.Logs;
 
 @Service("studentService")
-@Transactional(readOnly = true)
-public class StudentService {
+public class StudentService extends CrudService<StudentDao, Student> {
 	
 	/**
 	 * @Cacheable 支持如下几个参数：

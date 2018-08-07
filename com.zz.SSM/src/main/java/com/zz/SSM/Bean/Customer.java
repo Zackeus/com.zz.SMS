@@ -1,6 +1,5 @@
 package com.zz.SSM.Bean;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @author zhou.zhang
  * @date 2018年7月5日 下午7:06:51
  */
-public class Customer implements Serializable {
+public class Customer extends DataEntity<Customer> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -197,14 +196,5 @@ public class Customer implements Serializable {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer [taskId=" + taskId + ", contractNum=" + contractNum + ", odName=" + odName + ", rtype=" + rtype
-				+ ", phoneNum=" + phoneNum + ", odDays=" + odDays + ", odAmount=" + odAmount + ", addressType="
-				+ addressType + ", requestEmpno=" + requestEmpno + ", requestDatetime=" + requestDatetime + ", remark="
-				+ remark + ", sendBatch=" + sendBatch + ", simpleCallResults=" + simpleCallResults
-				+ ", customerCallResults=" + customerCallResults + ", pageParame=" + pageParame + "]";
 	}
 }

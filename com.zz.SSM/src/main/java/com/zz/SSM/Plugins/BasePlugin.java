@@ -31,6 +31,8 @@ public abstract class BasePlugin implements Interceptor, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	protected static final String PAGE = "page";
+	
 	protected static final String DELEGATE = "delegate";
 	
 	protected static final String DELEGATE_BOUNTSQL = "delegate.boundSql";

@@ -60,12 +60,12 @@
 	</select>
 	
 	<!-- 测试分页查询 -->
-	<select id="getCustomers" resultType="com.zz.SSM.Bean.Customer">
+	<select id="findList" resultType="com.zz.SSM.Bean.Customer">
 		SELECT <include refid="customerRole"/>
 		FROM [Message].[dbo].[COLLECTION_INFO]
 		<where>
-			<if test="customer.odName != null">
-				[OD_NAME] LIKE CONCAT('%', #{customer.odName}, '%')
+			<if test="odName != null">
+				[OD_NAME] LIKE CONCAT('%', #{odName}, '%')
 			</if>
 		</where>
 		ORDER BY [REQUEST_DATETIME] DESC

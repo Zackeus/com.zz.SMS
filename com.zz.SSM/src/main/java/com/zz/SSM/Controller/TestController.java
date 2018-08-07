@@ -22,7 +22,7 @@ import com.zz.SSM.Util.Logs;
 public class TestController {
 	
 	@Autowired
-	private TestService<Customer> testService;
+	private TestService testService;
 	
 	@Autowired
 	private StudentService studentService;
@@ -52,7 +52,8 @@ public class TestController {
 	 */
 	@RequestMapping(value = "/pageTest")
 	public void pageTest(HttpServletRequest request, HttpServletResponse response) {
-		Page<Customer> page = testService.getCustomers(new Page<>(900, 30), new Customer());
+		Page<Customer> page = testService.findPage(new Page<>(10, 30), new Customer());
+		
 		Logs.info("总条数：" + page.getTotal());
 		Logs.info("总页数：" + page.getTotalPage());
 		Logs.info("查询条数:" + page.getList().size());
@@ -119,6 +120,19 @@ public class TestController {
 	@RequestMapping(value = "/clearCacheTest")
 	public void clearCacheTest(HttpServletRequest request, HttpServletResponse response) {
 		studentService.clearCache();
+	}
+	
+	/**
+	 * 
+	 * @Title: clearCacheTest
+	 * @Description: TODO(更新保存)
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/saveTest")
+	public void saveTest(HttpServletRequest request, HttpServletResponse response) {
+		Student student  = new Student("童漠然", 18, "南京");
+		studentService.save(student);
 	}
 	
 }

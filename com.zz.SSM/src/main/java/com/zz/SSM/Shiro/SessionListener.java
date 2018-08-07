@@ -2,6 +2,8 @@ package com.zz.SSM.Shiro;
 
 import org.apache.shiro.session.Session;
 
+import com.zz.SSM.Util.Logs;
+
 /**
  * Shiro session监听
  * 
@@ -15,6 +17,7 @@ public class SessionListener implements org.apache.shiro.session.SessionListener
 	 */
 	@Override
 	public void onStart(Session session) {
+		Logs.info("会话创建");
 	}
 
 	/**

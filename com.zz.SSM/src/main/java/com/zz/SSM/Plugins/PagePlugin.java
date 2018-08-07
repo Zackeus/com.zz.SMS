@@ -1,8 +1,5 @@
 package com.zz.SSM.Plugins;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +24,7 @@ import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.session.Configuration;
 
 import com.zz.SSM.Bean.Page;
+import com.zz.SSM.Util.Reflections;
 
 /**
  * 
@@ -171,15 +169,7 @@ public class PagePlugin extends BasePlugin {
 			return (Page<Object>) parameterObject;
 		} else {
 			/*从POJO属性尝试读取分页参数*/
-			Field[] fields = parameterObject.getClass().getDeclaredFields();
-			// 尝试从POJO中获得类型为PageParams的属性
-			for (Field field : fields) {
-				if (field.getType() == Page.class) {
-					PropertyDescriptor pd = new PropertyDescriptor(field.getName(), parameterObject.getClass());
-					Method method = pd.getReadMethod();
-					return (Page<Object>) method.invoke(parameterObject);
-				}
-			}
+			return (Page<Object>)Reflections.getFieldValue(parameterObject, PAGE);
 		}
 		return pageParams;
 	}

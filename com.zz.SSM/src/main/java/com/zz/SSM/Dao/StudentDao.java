@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.zz.SSM.Bean.Student;
 
-public interface StudentDao {
+public interface StudentDao extends CrudDao<Student> {
 	
 	 List<Student> getStudents();
 	 
