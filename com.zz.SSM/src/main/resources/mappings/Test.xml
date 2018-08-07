@@ -60,7 +60,7 @@
 	</select>
 	
 	<!-- 测试分页查询 -->
-	<select id="findList" resultType="com.zz.SSM.Bean.Customer">
+	<select id="findList" resultType="Customer">
 		SELECT <include refid="customerRole"/>
 		FROM [Message].[dbo].[COLLECTION_INFO]
 		<where>

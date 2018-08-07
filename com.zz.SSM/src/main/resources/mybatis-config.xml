@@ -36,6 +36,11 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     
+    <!-- 类型别名  typeAliases配置需要放置在settings之后，否则会出异常 -->
+    <typeAliases>
+		<package name="com.zz.SSM.Bean"/>
+	</typeAliases>
+    
     <!-- 插件配置 -->
 	<plugins>
 		<plugin interceptor="com.zz.SSM.Plugins.PagePlugin">

@@ -423,4 +423,34 @@
 		    <version>${shiro.version}</version>  
 		</dependency>
 	</dependencies>
+	
+	<!--项目开发者列表-->
+	<developers>
+		<!--某个项目开发者的信息-->
+		<developer>
+			<!--SCM里项目开发者的唯一标识符-->
+			<id>SSM</id>
+			<!--项目开发者的全名-->
+			<name>Zackeus</name>
+			<!--项目开发者的email-->
+			<email>15058041631@163.com</email>
+			<!--项目开发者的主页的URL-->
+			<url/>
+			<!--项目开发者在项目中扮演的角色，角色元素描述了各种角色-->
+			<roles>
+				<role>ProjectManager</role>
+			</roles>
+			<!--项目开发者所属组织-->
+			<organization>demo</organization>
+			<!--项目开发者所属组织的URL-->
+			<organizationUrl>http://hi.baidu.com/banseon</organizationUrl>
+			<!--项目开发者所在时区，-12到14范围内的整数。-->
+			<timezone>+8</timezone>
+			<!-- 其他配置，键值对 -->
+			<properties>
+				<picUrl>https://github.com/Zackeus/com.zz.SMS.git</picUrl>
+			</properties>
+		</developer>
+	</developers>
+	
 </project>
