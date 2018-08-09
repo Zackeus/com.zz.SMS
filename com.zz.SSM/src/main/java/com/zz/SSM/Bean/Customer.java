@@ -3,8 +3,6 @@ package com.zz.SSM.Bean;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.ibatis.type.Alias;
-
 /**
  * 
  * @Title:Customer
@@ -13,7 +11,6 @@ import org.apache.ibatis.type.Alias;
  * @author zhou.zhang
  * @date 2018年7月5日 下午7:06:51
  */
-@Alias(value = "Customer")
 public class Customer extends DataEntity<Customer> {
 
 	private static final long serialVersionUID = 1L;
